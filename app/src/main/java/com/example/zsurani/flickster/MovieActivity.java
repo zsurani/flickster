@@ -1,9 +1,12 @@
 package com.example.zsurani.flickster;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.zsurani.flickster.adapters.MovieArrayAdapter;
@@ -24,11 +27,20 @@ public class MovieActivity extends AppCompatActivity {
     ArrayList<Movie> movies;
     MovieArrayAdapter movieAdapter;
     ListView lvItems;
+    String BDPath;
+
+    public String getBDPath() {
+        return String.format("https://image.tmdb.org/t/p/w342/%s", BDPath);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie);
+
+        //getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        //getSupportActionBar().setCustomView(R.layout.actionbar_title);
+
         lvItems = (ListView) findViewById(R.id.lvMovies);
         movies = new ArrayList<>();
         movieAdapter = new MovieArrayAdapter(this, movies);
@@ -60,5 +72,29 @@ public class MovieActivity extends AppCompatActivity {
                 super.onFailure(statusCode, headers, responseString, throwable);
             }
         });
+
+        launchComposeView();
+    }
+
+    private final int REQUEST_CODE = 20;
+
+    public void launchComposeView() {
+        lvItems.setOnItemClickListener(
+                new AdapterView.OnItemClickListener() {
+                    public void onItemClick(AdapterView<?> adapter, View item, int pos, long id) {
+
+
+                        Intent i = new Intent(MovieActivity.this, MoreActivity.class);
+                        //i.putExtra("backgroundIm", BDPath);
+                        i.putExtra("backgroundIM", movies.get(pos).getBDPath());
+                        i.putExtra("title", movies.get(pos).getOriginalTitle());
+                        i.putExtra("summary", movies.get(pos).getOverview());
+                        i.putExtra("popularity", movies.get(pos).getPopularity());
+                        i.putExtra("position", pos);
+                        startActivityForResult(i, REQUEST_CODE);
+
+                    }
+                }
+        );
     }
 }

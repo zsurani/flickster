@@ -26,6 +26,7 @@ public class MovieArrayAdapter extends ArrayAdapter<Movie> {
         TextView tvTitle;
         TextView tvOverview;
         ImageView ivMovieImage;
+        TextView popularity;
     }
 
 
@@ -47,6 +48,7 @@ public class MovieArrayAdapter extends ArrayAdapter<Movie> {
             viewHolder.tvTitle = (TextView) convertView.findViewById(R.id.tvTitle);
             viewHolder.tvOverview = (TextView) convertView.findViewById(R.id.tvOverview);
             viewHolder.ivMovieImage = (ImageView) convertView.findViewById(R.id.ivMovieImage);
+            //viewHolder.popularity = (TextView) convertView.findViewById(R.id.popularity);
             convertView.setTag(viewHolder);
         }
         else
