@@ -16,7 +16,7 @@ public class MoreActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_more);
 
-        String background = getIntent().getStringExtra("backdrop_path");
+        String background = getIntent().getStringExtra("backgroundIM");
         ImageView tvBackdrop = (ImageView) findViewById(R.id.backdrop);
         Picasso.with(this).load(background).into(tvBackdrop);
 

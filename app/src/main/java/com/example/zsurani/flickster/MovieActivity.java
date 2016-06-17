@@ -85,7 +85,7 @@ public class MovieActivity extends AppCompatActivity {
 
 
                         Intent i = new Intent(MovieActivity.this, MoreActivity.class);
-                        //i.putExtra("backgroundIm", BDPath);
+                        //i.putExtra("backgroundIM", BDPath);
                         i.putExtra("backgroundIM", movies.get(pos).getBDPath());
                         i.putExtra("title", movies.get(pos).getOriginalTitle());
                         i.putExtra("summary", movies.get(pos).getOverview());
